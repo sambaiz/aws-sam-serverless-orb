@@ -5,6 +5,10 @@ parameters:
     description: 'If set, this version of Python will be installed and set with pyenv globally. ex: "3.7.0" This is only for the local environment and will not have any effect if use-container is enabled.'
     type: string
     default: ""
+  sam_version:
+    description: 'This version of SAM will be installed.'
+    type: string
+    default: "latest"
   profile-name:
     description: Profile name to be configured.
     type: string
@@ -58,4 +62,4 @@ steps:
       configure-default-region: << parameters.configure-default-region >>
   - run:
       name: Install SAM CLI
-      command: <<include(scripts/install.sh)>>
+      command: SAM_VERSION=<< parameters.sam_version >> <<include(scripts/install.sh)>>
